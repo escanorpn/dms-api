@@ -1,0 +1,76 @@
+whats the schema for the project?
+should handle
+Lets go with vue, laravel, mysql.
+we can start with backend logic make it api based.
+there wont be a sign up, instead admin emails and roles will be added manually to db, use local server xamp
+Instead user should login with a given (generated) password then if not updated update their password
+then depending on the role eg (super_admin, dms_admin) provide ability for dms admin to be able to query documents using id number, store meta data (how many times document stored, if not found add record for not found documents with id number provided)
+
+super admin can do the same, manage user roles as well as upload, edit or delete documents with id numbers as keys, we can usea secrete name for files then store them with id as unique keys)
+
+lets have the backend logic first sql, larvel, then test with postman)
+
+provide command to migrate all required tables or sql code to add the tables
+
+sudo /opt/lampp/lampp start
+
+
+🧭 User Journey Summary (Vue Frontend)
+1. Login Page
+Fields: Email, Password
+
+Logic:
+
+User logs in with provided credentials.
+
+If first login or using generated password → force password update screen.
+
+Redirect user based on role after login.
+
+🔐 Password Update Flow
+Shown to: Users using generated passwords.
+
+Fields: New Password, Confirm Password
+
+Logic:
+
+Validate and update password.
+
+Proceed to role-based dashboard.
+
+🖥️ Role-Based Dashboard
+👑 Super Admin Dashboard
+Features:
+
+🔍 Search Documents by ID number
+
+View metadata: access count, status (found/not found)
+
+📄 Manage Documents
+
+Upload new document (ID + file)
+
+Edit document metadata
+
+Delete documents
+
+👥 Manage Users
+
+View admin users
+
+Assign or update roles (super_admin, dms_admin)
+
+View login history, reset password
+
+📂 DMS Admin Dashboard
+Features:
+
+🔍 Search Documents by ID number
+
+If found → show metadata, access count
+
+If not found → log "not found" entry with ID
+
+View search history
+
+No document upload/edit permissions
