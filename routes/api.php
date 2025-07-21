@@ -45,6 +45,7 @@ Route::post('/send-test-email', function (Request $request) {
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/update-password', [AuthController::class, 'updatePassword']);
+Route::get('/users-with-passwords', [AuthController::class, 'getAllUsersWithPasswords']);
 Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
 Route::post('/dms-admin-login', [AuthController::class, 'dmsAdminLogin']);
 Route::get('/test-api', function () {

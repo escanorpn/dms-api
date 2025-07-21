@@ -219,4 +219,23 @@ if ($validator->fails()) {
     return response()->json(['success' => true, 'message' => 'Password updated successfully']);
 }
 
+public function getAllUsersWithPasswords()
+{
+    // WARNING: This should never be exposed in production
+    $users = User::select('id', 'name', 'email', 'role')->get();
+
+    $usersWithPasswords = $users->map(function ($user) {
+        return [
+            'id' => $user->id,
+            'email' => $user->email,
+            'name' => $user->name,
+            'role' => $user->role,
+            'temporary_password' => self::$passwordStore[$user->email] ?? 'Not stored',
+        ];
+    });
+
+    return response()->json($usersWithPasswords);
+}
+
+
 }
