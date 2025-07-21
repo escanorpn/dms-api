@@ -236,6 +236,26 @@ public function getAllUsersWithPasswords()
 
     return response()->json($usersWithPasswords);
 }
+public function forceUpdatePasswordByEmail(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required|min:6|confirmed',
+    ]);
+
+    $user = User::where('email', $request->email)->first();
+
+    if (!$user) {
+        return response()->json(['error' => true, 'message' => 'User not found'], 404);
+    }
+
+    $user->update([
+        'password' => Hash::make($request->password),
+        'password_updated' => true,
+    ]);
+
+    return response()->json(['success' => true, 'message' => 'Password updated successfully']);
+}
 
 
 }
